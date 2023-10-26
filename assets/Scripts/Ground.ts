@@ -1,4 +1,5 @@
-import { _decorator, Component, Node, Vec3, UITransform, director, Canvas } from 'cc';
+import { _decorator, Component, Node, Vec3, UITransform, director, Canvas, CCInteger } from 'cc';
+import { GameControll } from './GameControll';
 const { ccclass, property } = _decorator;
 
 @ccclass('Ground')
@@ -19,19 +20,25 @@ export class Ground extends Component {
         tooltip: 'ground3 is here'
     }) ground3: Node;
 
+    @property({
+        type: CCInteger,
+    }) gameSpeed: number = 10;
+
+    gameControll = new GameControll();
+
     groundWith1: number;
     groundWith2: number;
     groundWith3: number;
-    tempStartLocation1 = new Vec3;
-    tempStartLocation2 = new Vec3;
-    tempStartLocation3 = new Vec3;
-    gameSpeed: number = 200;
+    tempStartLocation1 = new Vec3();
+    tempStartLocation2 = new Vec3();
+    tempStartLocation3 = new Vec3();
 
     onLoad() {
         this.startUp();
     }
-
+    
     startUp() {
+        this.gameSpeed = this.gameControll.gameSpeed;
         const scene = director.getScene();
         const canvasWidth = scene.getComponentInChildren(Canvas).getComponent(UITransform).width;
 

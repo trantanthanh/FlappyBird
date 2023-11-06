@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode } from 'cc';
+import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 const { ccclass, property } = _decorator;
@@ -24,11 +24,15 @@ export class GameControll extends Component {
 
     onLoad() { 
         this.initListener();
+        this.results.ResetScore();
+        this.results.HideResult();
+        director.pause();
     }
     initListener() {
         input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
     }
 
+    //for testing case
     onKeyDown(event: EventKeyboard) {
         switch (event.keyCode) {
             case KeyCode.KEY_A:
@@ -41,13 +45,25 @@ export class GameControll extends Component {
                     this.results.AddScore();
                     break;
                 }
+            case KeyCode.KEY_R:
+                {
+                    this.results.ResetScore();
+                    this.startGame();
+                    break;
+                }
         }
     }
-    GameOver() {
-        this.results.ShowResult();
+
+    startGame(){
+        this.results.HideResult();
+        director.resume();
     }
 
-    onTouchMove(event: EventKeyboard) { }
+    GameOver() {
+        this.results.ShowResult();
+        director.pause();
+    }
+
 }
 
 

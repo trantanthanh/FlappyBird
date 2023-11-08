@@ -1,6 +1,7 @@
 import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
+import { Bird } from './Bird';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameControll')
@@ -13,6 +14,11 @@ export class GameControll extends Component {
         type: Results,
         tooltip: "this is results"
     }) results: Results;
+
+    @property({
+        type: Bird,
+        tooltip: "this is bird"
+    }) bird : Bird;
 
     @property({
         type: CCInteger

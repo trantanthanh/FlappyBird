@@ -70,6 +70,10 @@ export class GameControll extends Component {
         director.resume();
     }
 
+    passPipe() {
+        this.results.AddScore();
+    }
+
     GameOver() {
         this.results.ShowResult();
         director.pause();

@@ -20,9 +20,7 @@ export class Ground extends Component {
         tooltip: 'ground3 is here'
     }) ground3: Node;
 
-    @property({
-        type: CCInteger,
-    }) gameSpeed: number = 10;
+    gameSpeed: number = 10;
 
     gameControll = new GameControll();
 
@@ -36,7 +34,7 @@ export class Ground extends Component {
     onLoad() {
         this.startUp();
     }
-    
+
     startUp() {
         this.gameSpeed = this.gameControll.gameSpeed;
         const scene = director.getScene();

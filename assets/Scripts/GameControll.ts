@@ -1,4 +1,4 @@
-import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director } from 'cc';
+import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director,CCFloat } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
@@ -27,6 +27,10 @@ export class GameControll extends Component {
     @property({
         type: CCInteger
     }) pipeSpeed: number = 200;
+
+    @property({
+        type : CCFloat
+    }) gapOfPipe : number  = 100;
 
     onLoad() { 
         this.initListener();

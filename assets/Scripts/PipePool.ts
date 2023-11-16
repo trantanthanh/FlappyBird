@@ -15,6 +15,7 @@ export class PipePool extends Component {
     pool = new NodePool;
 
     POOL_MAX: number = 3;
+    pipeSpawn;
 
     onLoad() {
         this.initPool();
@@ -22,22 +23,31 @@ export class PipePool extends Component {
 
     initPool() {
         for (let i = 0; i < this.POOL_MAX; i++) {
-            let pipe = instantiate(this.prefabPipe);
+            this.pipeSpawn = instantiate(this.prefabPipe);
             if (i == 0) {
-                this.pilePoolHome.addChild(pipe)
+                this.pilePoolHome.addChild(this.pipeSpawn)
             }
             else {
-                this.pool.put(pipe);
+                this.pool.put(this.pipeSpawn);
             }
         }
     }
 
-    addPool() {
+    addPipeFromPool() {
+        if (this.pool.size() > 0) {
+            this.pipeSpawn = this.pool.get();
+        }
+        else {
+            this.pipeSpawn = instantiate(this.prefabPipe);
+        }
 
+        this.pilePoolHome.addChild(this.pipeSpawn);
     }
 
-    resetPool() {
-
+    reset() {
+        this.pilePoolHome.removeAllChildren();
+        this.pool.clear();
+        this.initPool();
     }
 }
 

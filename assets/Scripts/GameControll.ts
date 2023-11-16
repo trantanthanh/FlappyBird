@@ -1,7 +1,8 @@
-import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director,CCFloat } from 'cc';
+import { _decorator, Component, Node, CCInteger, input, Input, EventKeyboard, KeyCode, director, CCFloat } from 'cc';
 import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
+import { PipePool } from './PipePool';
 const { ccclass, property } = _decorator;
 
 @ccclass('GameControll')
@@ -18,7 +19,7 @@ export class GameControll extends Component {
     @property({
         type: Bird,
         tooltip: "this is bird"
-    }) bird : Bird;
+    }) bird: Bird;
 
     @property({
         type: CCInteger
@@ -29,10 +30,14 @@ export class GameControll extends Component {
     }) pipeSpeed: number = 200;
 
     @property({
-        type : CCFloat
-    }) gapOfPipe : number  = 100;
+        type: CCFloat
+    }) gapOfPipe: number = 100;
 
-    onLoad() { 
+    @property({
+        type: PipePool
+    }) pipeQueue: PipePool;
+
+    onLoad() {
         this.initListener();
         this.results.ResetScore();
         this.results.HideResult();
@@ -69,13 +74,17 @@ export class GameControll extends Component {
         }
     }
 
-    startGame(){
+    startGame() {
         this.results.HideResult();
         director.resume();
     }
 
     passPipe() {
         this.results.AddScore();
+    }
+
+    createPipe() {
+        this.pipeQueue.addPool();
     }
 
     GameOver() {

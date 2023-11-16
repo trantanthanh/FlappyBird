@@ -1,6 +1,5 @@
 import { _decorator, Component, Node, Prefab, NodePool, instantiate } from 'cc';
 const { ccclass, property } = _decorator;
-import { Pipes } from './Pipes';
 
 @ccclass('PipePool')
 export class PipePool extends Component {
@@ -33,7 +32,7 @@ export class PipePool extends Component {
         }
     }
 
-    addPipeFromPool() {
+    addPool() {
         if (this.pool.size() > 0) {
             this.pipeSpawn = this.pool.get();
         }

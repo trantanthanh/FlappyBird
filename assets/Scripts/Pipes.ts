@@ -18,7 +18,6 @@ export class Pipes extends Component {
     pipeSpeed: number = 10;
     scene = screen.windowSize;
     isPass: boolean = false;
-    canvasWidth: number = 0;
 
     tempStartLocationTop: Vec3 = new Vec3(0, 0, 0);
     tempStartLocationBottom: Vec3 = new Vec3(0, 0, 0);
@@ -31,7 +30,6 @@ export class Pipes extends Component {
 
     initPos() {
 
-        this.canvasWidth = director.getScene().getComponentInChildren(Canvas).getComponent(UITransform).width;
         this.tempStartLocationTop.x = this.topPipe.getComponent(UITransform).width + this.scene.width;
         this.tempStartLocationBottom.x = this.bottomPipe.getComponent(UITransform).width + this.scene.width;
 
@@ -59,9 +57,8 @@ export class Pipes extends Component {
             this.isPass = true;
             this.game.passPipe();
         }
-        else if (this.topPipe.position.x <= -this.canvasWidth / 2 - this.topPipe.getComponent(UITransform).width) {
-            this.topPipe.active = false;
-            this.bottomPipe.active = false;
+        else if (this.topPipe.position.x <= -this.scene.width) {
+            this.game.createPipe();
             this.destroy();
         }
     }

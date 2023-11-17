@@ -15,6 +15,8 @@ export class Bird extends Component {
 
     birdAnimation: Animation;
     birdStartLocation: Vec3 = new Vec3(0, 0, 0);
+
+    public hitSomething:boolean = false;
     onLoad() {
         this.birdStartLocation = this.node.getPosition();
         this.resetBird();
@@ -22,6 +24,7 @@ export class Bird extends Component {
     }
     resetBird() {
         this.node.setPosition(this.birdStartLocation);
+        this.hitSomething = false;
     }
 
     fly() {

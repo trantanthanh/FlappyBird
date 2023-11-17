@@ -1,5 +1,5 @@
 import { _decorator, Component, Node, Vec3, UITransform, director, Canvas, CCInteger } from 'cc';
-import { GameControll } from './GameControll';
+import { GameControl } from './GameControl';
 const { ccclass, property } = _decorator;
 
 @ccclass('Ground')
@@ -22,7 +22,7 @@ export class Ground extends Component {
 
     gameSpeed: number = 10;
 
-    gameControll = new GameControll();
+    gameControl = new GameControl();
 
     groundWith1: number;
     groundWith2: number;
@@ -36,7 +36,7 @@ export class Ground extends Component {
     }
 
     startUp() {
-        this.gameSpeed = this.gameControll.gameSpeed;
+        this.gameSpeed = this.gameControl.gameSpeed;
         const scene = director.getScene();
         const canvasWidth = scene.getComponentInChildren(Canvas).getComponent(UITransform).width;
 

@@ -14,7 +14,7 @@ export class Pipes extends Component {
         tooltip: 'bottom pipe'
     }) bottomPipe: Node;
 
-    game;//instance of GameControll
+    game;//instance of GameControl
     pipeSpeed: number = 10;
     scene = screen.windowSize;
     isPass: boolean = false;
@@ -22,7 +22,7 @@ export class Pipes extends Component {
     tempStartLocationTop: Vec3 = new Vec3(0, 0, 0);
     tempStartLocationBottom: Vec3 = new Vec3(0, 0, 0);
     onLoad() {
-        this.game = find("GameControll").getComponent("GameControll");
+        this.game = find("GameControl").getComponent("GameControl");
         this.pipeSpeed = this.game.pipeSpeed;
         this.isPass = false;
         this.initPos();

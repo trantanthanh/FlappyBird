@@ -8,8 +8,8 @@ import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 const { ccclass, property } = _decorator;
 
-@ccclass('GameControll')
-export class GameControll extends Component {
+@ccclass('GameControl')
+export class GameControl extends Component {
     @property({
         type: Ground
     }) ground: Ground;

@@ -23,12 +23,7 @@ export class PipePool extends Component {
     initPool() {
         for (let i = 0; i < this.POOL_MAX; i++) {
             this.pipeSpawn = instantiate(this.prefabPipe);
-            if (i == 0) {
-                this.pilePoolHome.addChild(this.pipeSpawn)
-            }
-            else {
-                this.pool.put(this.pipeSpawn);
-            }
+            this.pool.put(this.pipeSpawn);
         }
     }
 

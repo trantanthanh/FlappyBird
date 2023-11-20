@@ -146,6 +146,8 @@
     "birdAudio": {
       "__id__": 58
     },
+    "timeIntervalSpawnPipe": 1.5,
+    "timeVariableSpawnPipe": 0.4,
     "_id": "73GqyryQlGPLa3ss2asX6h"
   },
   {
@@ -710,7 +712,7 @@
     "_group": 1,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 2.5,
+    "_gravityScale": 3.2,
     "_linearDamping": 2,
     "_angularDamping": 0,
     "_linearVelocity": {

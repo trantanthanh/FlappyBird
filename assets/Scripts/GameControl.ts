@@ -7,6 +7,9 @@ import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
 import { BirdAudio } from "./BirdAudio";
+import Timer from './Timer';
+
+const random = (min, max) => { return Math.random() * (max - min) + min };
 
 const { ccclass, property } = _decorator;
 
@@ -56,12 +59,29 @@ export class GameControl extends Component {
 
     isGameOver: boolean = false;
 
+    timerIntSpawnPipe : Timer = new Timer();
+    @property(
+        {
+            type: CCFloat,
+            tooltip: 'time interval to spawn pipe'
+        }
+    ) timeIntervalSpawnPipe: number = 0.5;
+
+    @property({
+        type: CCFloat,
+        range: [0, 3],
+        slide: true,
+        tooltip: "time variable to spawn pipe"
+    })
+    timeVariableSpawnPipe: number = 0.1;
+
     onLoad() {
         this.initListener();
         this.isGameOver = true;
         this.results.ResetScore();
         this.results.HideResult();
         director.pause();
+        this.timerIntSpawnPipe.SetDuration(0);//for first spawn immediately
     }
     initListener() {
         // input.on(Input.EventType.KEY_DOWN, this.onKeyDown, this);
@@ -146,6 +166,13 @@ export class GameControl extends Component {
     update(deltaTime: number) {
         if (!this.isGameOver) {
             this.birdStruck();
+
+            this.timerIntSpawnPipe.Update(deltaTime);
+            if (this.timerIntSpawnPipe.JustFinished())
+            {
+                this.timerIntSpawnPipe.SetDuration(this.timeIntervalSpawnPipe + (random(0, 1) < 0.5 ? -1 : 1) * random(0, this.timeVariableSpawnPipe));
+                this.createPipe();
+            }
         }
     }
 }

@@ -58,7 +58,7 @@ export class Pipes extends Component {
             this.game.passPipe();
         }
         else if (this.topPipe.position.x <= -this.scene.width) {
-            this.game.createPipe();
+            // this.game.createPipe();
             this.destroy();
         }
     }

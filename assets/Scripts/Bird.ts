@@ -20,7 +20,7 @@ export class Bird extends Component {
 
     public hitSomething: boolean = false;
     onLoad() {
-        this.birdStartLocation = this.node.getPosition();
+        // this.birdStartLocation = this.node.getPosition();
         this.resetBird();
         this.birdAnimation = this.getComponent(Animation);
     }

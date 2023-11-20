@@ -6,7 +6,17 @@ import { Ground } from './Ground';
 import { Results } from './Results';
 import { Bird } from './Bird';
 import { PipePool } from './PipePool';
+import { BirdAudio } from "./BirdAudio";
+
 const { ccclass, property } = _decorator;
+
+enum AudioIndex {
+    FLAP,
+    POINT,
+    HIT,
+    DIE,
+    WING
+};
 
 @ccclass('GameControl')
 export class GameControl extends Component {
@@ -40,6 +50,10 @@ export class GameControl extends Component {
         type: PipePool
     }) pipeQueue: PipePool;
 
+    @property({
+        type: BirdAudio
+    }) birdAudio: BirdAudio;
+
     isGameOver: boolean = false;
 
     onLoad() {
@@ -58,6 +72,7 @@ export class GameControl extends Component {
             }
             else {
                 this.bird.fly();
+                this.birdAudio.onAudioQueue(AudioIndex.WING);
             }
         })
     }
@@ -97,6 +112,7 @@ export class GameControl extends Component {
     }
 
     passPipe() {
+        this.birdAudio.onAudioQueue(AudioIndex.POINT);
         this.results.AddScore();
     }
 
@@ -112,11 +128,11 @@ export class GameControl extends Component {
 
     contactGroundPipe() {
         let birdCollider = this.bird.getComponent(Collider2D);
-
         birdCollider.on(Contact2DType.BEGIN_CONTACT, this.onBeginContact, this);
     }
 
     onBeginContact(selfCollider: Collider2D, otherCollider: Collider2D, contact: IPhysics2DContact | null) {
+        this.birdAudio.onAudioQueue(AudioIndex.HIT);
         this.bird.hitSomething = true;
     }
 

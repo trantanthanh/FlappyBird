@@ -139,7 +139,8 @@
     },
     "gameSpeed": 250,
     "pipeSpeed": 300,
-    "gapOfPipe": 300,
+    "gapOfPipe": 290,
+    "gapOfPipeVariable": 20,
     "pipeQueue": {
       "__id__": 57
     },
@@ -712,7 +713,7 @@
     "_group": 1,
     "_type": 2,
     "_allowSleep": true,
-    "_gravityScale": 3.2,
+    "_gravityScale": 3,
     "_linearDamping": 2,
     "_angularDamping": 0,
     "_linearVelocity": {

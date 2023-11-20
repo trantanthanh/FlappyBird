@@ -16,7 +16,9 @@ export class Bird extends Component {
     birdAnimation: Animation;
     birdStartLocation: Vec3 = new Vec3(0, 0, 0);
 
-    public hitSomething:boolean = false;
+    isFlapping: boolean = false;
+
+    public hitSomething: boolean = false;
     onLoad() {
         this.birdStartLocation = this.node.getPosition();
         this.resetBird();
@@ -28,6 +30,7 @@ export class Bird extends Component {
     }
 
     fly() {
+        this.isFlapping = true;
         this.birdAnimation.stop();
 
         tween(this.node.position)
@@ -36,8 +39,11 @@ export class Bird extends Component {
                 onUpdate: (target: Vec3, ratio: number) => {
                     this.node.position = target;
                 }
-            }
-            ).start();
+            })
+            .call(() => {
+                this.isFlapping = false;
+            })
+            .start();
         this.birdAnimation.play();
     }
 }

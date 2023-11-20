@@ -50,6 +50,13 @@ export class GameControl extends Component {
     }) gapOfPipe: number = 100;
 
     @property({
+        type: CCFloat,
+        range: [0, 100],
+        slide: true,
+        tooltip: 'variable gap of pipe',
+    }) gapOfPipeVariable: number = 30;
+
+    @property({
         type: PipePool
     }) pipeQueue: PipePool;
 
@@ -59,7 +66,7 @@ export class GameControl extends Component {
 
     isGameOver: boolean = false;
 
-    timerIntSpawnPipe : Timer = new Timer();
+    timerIntSpawnPipe: Timer = new Timer();
     @property(
         {
             type: CCFloat,
@@ -91,10 +98,16 @@ export class GameControl extends Component {
                 this.resetGame();
             }
             else {
-                this.bird.fly();
-                this.birdAudio.onAudioQueue(AudioIndex.WING);
+                if (!this.bird.isFlapping) {
+                    this.bird.fly();
+                    this.birdAudio.onAudioQueue(AudioIndex.WING);
+                }
             }
         })
+    }
+
+    getVariableGap():number {
+        return this.gapOfPipe + (random(0, 1) < 0.5 ? -1 : 1) * random(0, this.gapOfPipeVariable);
     }
 
     //for testing case
@@ -168,8 +181,7 @@ export class GameControl extends Component {
             this.birdStruck();
 
             this.timerIntSpawnPipe.Update(deltaTime);
-            if (this.timerIntSpawnPipe.JustFinished())
-            {
+            if (this.timerIntSpawnPipe.JustFinished()) {
                 this.timerIntSpawnPipe.SetDuration(this.timeIntervalSpawnPipe + (random(0, 1) < 0.5 ? -1 : 1) * random(0, this.timeVariableSpawnPipe));
                 this.createPipe();
             }

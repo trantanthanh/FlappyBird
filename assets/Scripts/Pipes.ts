@@ -14,6 +14,8 @@ export class Pipes extends Component {
         tooltip: 'bottom pipe'
     }) bottomPipe: Node;
 
+
+
     game;//instance of GameControl
     pipeSpeed: number = 10;
     scene = screen.windowSize;
@@ -33,7 +35,7 @@ export class Pipes extends Component {
         this.tempStartLocationTop.x = this.topPipe.getComponent(UITransform).width + this.scene.width;
         this.tempStartLocationBottom.x = this.bottomPipe.getComponent(UITransform).width + this.scene.width;
 
-        let gap = random(this.game.gapOfPipe - 10, this.game.gapOfPipe);
+        let gap = this.game.getVariableGap();
         let distanceHeight = random(0, 350);
 
         this.tempStartLocationTop.y = distanceHeight;

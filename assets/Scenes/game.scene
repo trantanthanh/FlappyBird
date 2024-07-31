@@ -141,7 +141,7 @@
     "pipeSpeed": 300,
     "gapOfPipe": 290,
     "gapOfPipeVariable": 20,
-    "pipeQueue": {
+    "pipePool": {
       "__id__": 57
     },
     "birdAudio": {
@@ -1033,6 +1033,29 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
+    "_enableOutline": false,
+    "_outlineColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_outlineWidth": 2,
+    "_enableShadow": false,
+    "_shadowColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_shadowOffset": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "_shadowBlur": 2,
     "_id": "042gRazwVGHpqGn7KfmZSM"
   },
   {
@@ -1145,6 +1168,29 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
+    "_enableOutline": false,
+    "_outlineColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_outlineWidth": 2,
+    "_enableShadow": false,
+    "_shadowColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_shadowOffset": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "_shadowBlur": 2,
     "_id": "58pjXLWxVGNK6xEt3MbAnq"
   },
   {
@@ -1279,6 +1325,29 @@
     "_isUnderline": false,
     "_underlineHeight": 2,
     "_cacheMode": 0,
+    "_enableOutline": false,
+    "_outlineColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_outlineWidth": 2,
+    "_enableShadow": false,
+    "_shadowColor": {
+      "__type__": "cc.Color",
+      "r": 0,
+      "g": 0,
+      "b": 0,
+      "a": 255
+    },
+    "_shadowOffset": {
+      "__type__": "cc.Vec2",
+      "x": 2,
+      "y": 2
+    },
+    "_shadowBlur": 2,
     "_id": "35isT6NiVEJr5ms8Z4DxsD"
   },
   {
@@ -2013,7 +2082,10 @@
       "__uuid__": "a8bfa09f-7234-49de-b0af-eb00fe03887a",
       "__expectedType__": "cc.Prefab"
     },
-    "pilePoolHome": {
+    "pilePoolParent": {
+      "__id__": 2
+    },
+    "pilePoolSpawnParent": {
       "__id__": 20
     },
     "_id": "b2gV/HujxEZrr0kxuY6K3B"
@@ -2214,6 +2286,9 @@
     "lightProbeInfo": {
       "__id__": 71
     },
+    "postSettings": {
+      "__id__": 72
+    },
     "bakedWithStationaryMainLight": false,
     "bakedWithHighpLightmap": false
   },
@@ -2276,6 +2351,7 @@
       "z": 0
     },
     "_distance": 0,
+    "_planeBias": 1,
     "_shadowColor": {
       "__type__": "cc.Color",
       "r": 76,
@@ -2358,5 +2434,9 @@
     "_showConvex": false,
     "_data": null,
     "_lightProbeSphereVolume": 1
+  },
+  {
+    "__type__": "cc.PostSettingsInfo",
+    "_toneMappingType": 0
   }
 ]

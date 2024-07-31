@@ -8,10 +8,14 @@ export class PipePool extends Component {
     }) prefabPipe = null;
 
     @property({
-        type: Node
-    }) pilePoolHome = null;
+        type : Node
+    }) pilePoolParent = null;
 
-    pool = new NodePool;
+    @property({
+        type: Node
+    }) pilePoolSpawnParent = null;
+
+    pool = new NodePool();
 
     POOL_MAX: number = 3;
     pipeSpawn;
@@ -23,25 +27,35 @@ export class PipePool extends Component {
     initPool() {
         for (let i = 0; i < this.POOL_MAX; i++) {
             this.pipeSpawn = instantiate(this.prefabPipe);
+            this.pipeSpawn.active = false;
             this.pool.put(this.pipeSpawn);
+            this.pilePoolParent.addChild(this.pipeSpawn);
         }
     }
 
-    addPool() {
+    respawnFromPool() {
         if (this.pool.size() > 0) {
             this.pipeSpawn = this.pool.get();
         }
         else {
+            // console.log("Pool is empty");
             this.pipeSpawn = instantiate(this.prefabPipe);
         }
 
-        this.pilePoolHome.addChild(this.pipeSpawn);
+        this.pipeSpawn.active = true;
+        this.pilePoolSpawnParent.addChild(this.pipeSpawn);
+    }
+
+    despawnToPool(node: Node) {
+        node.active = false;
+        this.pool.put(node);
+        this.pilePoolParent.addChild(node);
     }
 
     reset() {
-        this.pilePoolHome.removeAllChildren();
-        this.pool.clear();
-        this.initPool();
+        for (let i = 0; i < this.pilePoolSpawnParent.children.length; i++) {
+            this.despawnToPool(this.pilePoolSpawnParent.children[i]);
+        }
     }
 }
 

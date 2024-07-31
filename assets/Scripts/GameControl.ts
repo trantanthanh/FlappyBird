@@ -58,7 +58,7 @@ export class GameControl extends Component {
 
     @property({
         type: PipePool
-    }) pipeQueue: PipePool;
+    }) pipePool: PipePool;
 
     @property({
         type: BirdAudio
@@ -135,7 +135,7 @@ export class GameControl extends Component {
         this.isGameOver = false;
         this.results.ResetScore();
         this.bird.resetBird();
-        this.pipeQueue.reset();
+        this.pipePool.reset();
         this.startGame();
     }
 
@@ -150,7 +150,12 @@ export class GameControl extends Component {
     }
 
     createPipe() {
-        this.pipeQueue.addPool();
+        this.pipePool.respawnFromPool();
+    }
+
+    finishPipe(node : Node)
+    {
+        this.pipePool.despawnToPool(node);
     }
 
     GameOver() {

@@ -1,4 +1,5 @@
 import { _decorator, Component, Node, Vec3, find, UITransform, screen, director, Canvas } from 'cc';
+import { GameControl } from './GameControl';
 const { ccclass, property } = _decorator;
 
 const random = (min, max) => { return Math.random() * (max - min) + min };
@@ -25,16 +26,17 @@ export class Pipes extends Component {
     tempStartLocationBottom: Vec3 = new Vec3(0, 0, 0);
     onLoad() {
         this.game = find("GameControl").getComponent("GameControl");
+    }
+
+    onEnable(){
         this.pipeSpeed = this.game.pipeSpeed;
         this.isPass = false;
         this.initPos();
     }
 
     initPos() {
-
-        this.tempStartLocationTop.x = this.topPipe.getComponent(UITransform).width + this.scene.width;
-        this.tempStartLocationBottom.x = this.bottomPipe.getComponent(UITransform).width + this.scene.width;
-
+        this.node.setPosition(this.getComponent(UITransform).width + this.scene.width, this.node.getPosition().y);
+        
         let gap = this.game.getVariableGap();
         let distanceHeight = random(0, 350);
 
@@ -46,22 +48,17 @@ export class Pipes extends Component {
     }
 
     updatePos(deltaTime: number) {
-        this.tempStartLocationTop.x -= this.pipeSpeed * deltaTime;
-        this.tempStartLocationBottom.x -= this.pipeSpeed * deltaTime;
-
-        this.topPipe.setPosition(this.tempStartLocationTop);
-        this.bottomPipe.setPosition(this.tempStartLocationBottom);
+        this.node.setPosition(this.node.getPosition().x - this.pipeSpeed * deltaTime, this.node.getPosition().y);
     }
 
     update(deltaTime: number): void {
         this.updatePos(deltaTime);
-        if (!this.isPass && this.topPipe.position.x <= 0) {
+        if (!this.isPass && this.node.getPosition().x <= 0) {
             this.isPass = true;
             this.game.passPipe();
         }
-        else if (this.topPipe.position.x <= -this.scene.width) {
-            // this.game.createPipe();
-            this.destroy();
+        else if (this.node.getPosition().x <= -this.scene.width) {
+            this.game.finishPipe(this.node);
         }
     }
 }

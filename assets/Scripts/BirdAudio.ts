@@ -4,7 +4,7 @@ const { ccclass, property } = _decorator;
 @ccclass('BirdAudio')
 export class BirdAudio extends Component {
     @property({
-        type: [AudioClip]
+        type: AudioClip
     }) clips: AudioClip[] = [];
 
     @property({
